@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header 组件包括一个 input 框 1`] = `
+<div>
+  Header
+</div>
+`;
