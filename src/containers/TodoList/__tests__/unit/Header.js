@@ -1,28 +1,26 @@
 import React from 'react';
-import Enzyme, {shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import {shallow} from 'enzyme';
 import Header from '../../components/Header'
-
-Enzyme.configure({ adapter: new Adapter() });
+import {findTestWrapper} from '../../../../utils/testUtils'
 it('Header样式渲染正常', ()=>{
     const wrapper = shallow(<Header />);
     expect(wrapper).toMatchSnapshot()
 })
 it('Header 组件包括一个 input 框', ()=>{
  const wrapper = shallow(<Header />)
- const inputElem = wrapper.find("[data-test='input']");
+ const inputElem = findTestWrapper(wrapper, 'input');
  expect(inputElem.length).toBe(1)
 })
 
 it('Header 组件的 input 框内容初始化为空', ()=>{
     const wrapper = shallow(<Header />)
-    const inputElem = wrapper.find("[data-test='input']");
+    const inputElem = findTestWrapper(wrapper, 'input');
     expect(inputElem.prop('value')).toEqual('')
    })
 
 it('Header 组件的 input 框内容随着用户输入而变化', ()=>{
     const wrapper = shallow(<Header />)
-    const inputElem = wrapper.find("[data-test='input']");
+    const inputElem = findTestWrapper(wrapper, 'input');
     const userInput = '今天要学习jest'
     inputElem.simulate('change', {
         target: {
@@ -40,7 +38,7 @@ it('Header 组件的 input 框内容随着用户输入而变化', ()=>{
 it('Header 组件的 input 框回车操作后，如果input没有内容，无操作', ()=>{
     const fn = jest.fn()
     const wrapper = shallow(<Header addUndoItem={fn}/>)
-    const inputElem = wrapper.find("[data-test='input']");
+    const inputElem = findTestWrapper(wrapper, 'input');
     wrapper.setState({value:''})
     inputElem.simulate('keyUp', {
         keyCode: 13
@@ -51,7 +49,7 @@ it('Header 组件的 input 框回车操作后，如果input没有内容，无操
 it('Header 组件的 input 框回车操作后，如果input有内容，函数应该被调用', ()=>{
     const fn = jest.fn()
     const wrapper = shallow(<Header addUndoItem={fn}/>)
-    const inputElem = wrapper.find("[data-test='input']");
+    const inputElem = findTestWrapper(wrapper, 'input');
     const userInput = '学习 react'
     wrapper.setState({value: userInput})
     inputElem.simulate('keyUp', {
@@ -64,13 +62,13 @@ it('Header 组件的 input 框回车操作后，如果input有内容，函数应
 it('Header 组件的 input 框回车操作后，如果input有内容，函数应该被调用, 如果input有内容，最后应该清除掉', ()=>{
     const fn = jest.fn()
     const wrapper = shallow(<Header addUndoItem={fn}/>)
-    const inputElem = wrapper.find("[data-test='input']");
+    const inputElem = findTestWrapper(wrapper, 'input');
     const userInput = '学习 react'
     wrapper.setState({value: userInput})
     inputElem.simulate('keyUp', {
         keyCode: 13
     })
-    const newInputElem = wrapper.find("[data-test='input']");
+    const newInputElem = findTestWrapper(wrapper, 'input');
     expect(newInputElem.prop('value')).toBe('')
    })
 
