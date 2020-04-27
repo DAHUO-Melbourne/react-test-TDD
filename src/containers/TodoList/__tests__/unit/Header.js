@@ -4,6 +4,10 @@ import Adapter from 'enzyme-adapter-react-16';
 import Header from '../../components/Header'
 
 Enzyme.configure({ adapter: new Adapter() });
+it('Header样式渲染正常', ()=>{
+    const wrapper = shallow(<Header />);
+    expect(wrapper).toMatchSnapshot()
+})
 it('Header 组件包括一个 input 框', ()=>{
  const wrapper = shallow(<Header />)
  const inputElem = wrapper.find("[data-test='input']");
