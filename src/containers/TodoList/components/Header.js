@@ -15,7 +15,7 @@ class Header extends Component {
                 <div className="header-content">
                     TodoList
                     <input
-                    placeholder='To do'
+                    placeholder='Add Todo'
                     className="header-input"
                      data-test='input'
                      value={value}
