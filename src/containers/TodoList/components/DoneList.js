@@ -5,7 +5,7 @@ class UndoList extends Component {
         return (
             <div className="undo-list">
                 <div className="undo-list-title">
-                    正在进行
+                    已经完成
                     <div data-test="count" className="undo-list-count">{list.length}</div>
                 </div>
                 <ul className="undo-list-content">
@@ -22,7 +22,7 @@ class UndoList extends Component {
                               type="checkbox"
                               className="undo-list-checkout"
                               data-test="checkbox"
-                              checked=''
+                              checked='true'
                               onClick={(e)=>{
                                 e.stopPropagation()
                                 checkItem(index, e.target.checked)

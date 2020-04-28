@@ -89,3 +89,11 @@ body {
     text-indent: 10px;
     outline: none;
 }
+
+.undo-list-checkout {
+    left: 10px;
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    vertical-align: baseline;
+}
