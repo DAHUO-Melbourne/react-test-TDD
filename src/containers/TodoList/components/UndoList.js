@@ -30,7 +30,7 @@ class UndoList extends Component {
                              className="undo-list-delete"
                              data-test="delete-item" 
                              onClick={(e)=>{
-                                 e && e.stopPropagation()
+                                 e.stopPropagation()
                                  deleteItem(index)}}
                              >-</div>
                         </li>)

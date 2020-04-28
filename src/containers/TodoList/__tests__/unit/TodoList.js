@@ -115,6 +115,9 @@ describe('TodoList 组件', ()=>{
         const data = [{
             status: 'input',
             value: '学习jest'
+        },{
+            status: 'div',
+            value: '学习 TDD'
         }]
         const value = 'da huo'
         wrapper.setState({
