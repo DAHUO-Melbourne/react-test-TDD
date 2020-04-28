@@ -137,7 +137,7 @@ class TodoList extends Component {
             undoList: newUndoList
         })
     }
-    checkDoneItem(index, checked){
+    checkDoneItem(index){
         const newList = this.state.undoList
         this.state.doneList.map((item, listIndex)=>{
             if(index===listIndex){
