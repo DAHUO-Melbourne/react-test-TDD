@@ -20,6 +20,27 @@ exports[`Header样式渲染正常 1`] = `
 </div>
 `;
 
+exports[`UndoList 组件 样式渲染正常 1`] = `
+<div
+  className="undo-list"
+>
+  <div
+    className="undo-list-title"
+  >
+    正在进行
+    <div
+      className="undo-list-count"
+      data-test="count"
+    >
+      0
+    </div>
+  </div>
+  <ul
+    className="undo-list-content"
+  />
+</div>
+`;
+
 exports[`未完成列表初始化 count 数目为0 1`] = `<div />`;
 
 exports[`未完成列表初始化 count 数目为0, 列表无内容 1`] = `<div />`;

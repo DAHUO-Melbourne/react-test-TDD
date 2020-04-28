@@ -10,10 +10,16 @@ class TodoList extends Component {
         }
         this.addUndoItem = this.addUndoItem.bind(this)
         this.deleteItem = this.deleteItem.bind(this)
+        this.changeStatus = this.changeStatus.bind(this)
+        this.handleBlur = this.handleBlur.bind(this)
+        this.valueChange = this.valueChange.bind(this)
     }
     addUndoItem(value){
         this.setState({
-            undoList: [...this.state.undoList, value]
+            undoList: [...this.state.undoList, {
+                status:'div',
+                value
+            }]
         })
     }
     deleteItem(index){
@@ -23,12 +29,56 @@ class TodoList extends Component {
             undoList: newList
         })
     }
+    changeStatus(index){
+        const newList = this.state.undoList.map((item, listIndex) => {
+            if(index===listIndex){
+                return{
+                    ...item,
+                    status:'input'
+                }
+            }
+            return{
+                ...item,
+                status:'div'
+            }
+        })
+        this.setState({undoList: newList})
+    }
+    handleBlur(index){
+        const newList = this.state.undoList.map((item, listIndex) => {
+            if(index===listIndex){
+                return{
+                    ...item,
+                    status:'div'
+                }
+            }
+            return item
+        })
+        this.setState({undoList: newList})
+    }
+    valueChange(index, value){
+        const newList = this.state.undoList.map((item, listIndex) => {
+            if(index===listIndex){
+                return{
+                    ...item,
+                    value
+                }
+            }
+            return item
+        })
+        this.setState({undoList: newList})   
+    }
     render(){
         const { undoList } = this.state
         return (
             <div>
                 <Header addUndoItem={this.addUndoItem} />
-                <UndoList list={undoList} deleteItem={this.deleteItem}/>
+                <UndoList
+                 list={undoList} 
+                 deleteItem={this.deleteItem}
+                 changeStatus={this.changeStatus}
+                 handleBlur={this.handleBlur}
+                 valueChange={this.valueChange}/>
             </div>
         )
     }
