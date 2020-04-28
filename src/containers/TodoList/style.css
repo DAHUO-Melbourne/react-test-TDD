@@ -77,6 +77,7 @@ body {
     background: #E6E6EA;
     text-indent: 0;
     border-radius: 50%;
+    cursor: pointer;
 }
 
 .undo-list-input {
