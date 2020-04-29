@@ -5,7 +5,7 @@ class UndoList extends Component {
         return (
             <div className="undo-list">
                 <div className="undo-list-title">
-                    已经完成
+                    DONE
                     <div data-test="count" className="undo-list-count">{list.length}</div>
                 </div>
                 <ul className="undo-list-content">
