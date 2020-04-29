@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
-class UndoList extends Component {
+class DoneList extends Component {
     render(){
         const { list, deleteItem, changeStatus, handleBlur, valueChange, checkItem } = this.props
         return (
             <div className="undo-list">
                 <div className="undo-list-title">
                     DONE
-                    <div data-test="count" className="undo-list-count">{list.length}</div>
+                    <div data-test="done-count" className="undo-list-count">{list.length}</div>
                 </div>
                 <ul className="undo-list-content">
                     {
                         list.map((item, index)=>{
                         return (
                         <li
-                         data-test="list-item"
+                         data-test="done-list-item"
                          key={index}
                          className="undo-list-item"
                          onClick={() => changeStatus(index)}
@@ -21,7 +21,7 @@ class UndoList extends Component {
                              <input
                               type="checkbox"
                               className="undo-list-checkout"
-                              data-test="checkbox"
+                              data-test="done-checkbox"
                               checked='true'
                               onClick={(e)=>{
                                 e.stopPropagation()
@@ -30,14 +30,14 @@ class UndoList extends Component {
                             {item.status==='div'?item.value:(
                                 <input 
                                   className='undo-list-input'
-                                  data-test="input" 
+                                  data-test="done-input" 
                                   value={item.value}
                                   onBlur={()=>{handleBlur(index)}}
                                   onChange={(e)=>{valueChange(index, e.target.value)}}/>
                             )}
                             <div
                              className="undo-list-delete"
-                             data-test="delete-item" 
+                             data-test="done-delete-item" 
                              onClick={(e)=>{
                                  e.stopPropagation()
                                  deleteItem(index)}}
@@ -50,4 +50,4 @@ class UndoList extends Component {
         )
     }
 }
-export default UndoList;
+export default DoneList;

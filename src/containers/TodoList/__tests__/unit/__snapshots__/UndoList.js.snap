@@ -1,25 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Header样式渲染正常 1`] = `
-<div
-  className="header"
->
-  <div
-    className="header-content"
-  >
-    TodoList
-    <input
-      className="header-input"
-      data-test="input"
-      onChange={[Function]}
-      onKeyUp={[Function]}
-      placeholder="Add Todo"
-      value=""
-    />
-  </div>
-</div>
-`;
-
 exports[`UndoList 组件 样式渲染正常 1`] = `
 <div
   className="undo-list"
@@ -27,7 +7,7 @@ exports[`UndoList 组件 样式渲染正常 1`] = `
   <div
     className="undo-list-title"
   >
-    正在进行
+    DOING
     <div
       className="undo-list-count"
       data-test="count"
@@ -40,7 +20,3 @@ exports[`UndoList 组件 样式渲染正常 1`] = `
   />
 </div>
 `;
-
-exports[`未完成列表初始化 count 数目为0 1`] = `<div />`;
-
-exports[`未完成列表初始化 count 数目为0, 列表无内容 1`] = `<div />`;
