@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DoneList 组件 样式渲染正常 1`] = `
+<div
+  className="undo-list"
+>
+  <div
+    className="undo-list-title"
+  >
+    DONE
+    <div
+      className="undo-list-count"
+      data-test="done-count"
+    >
+      0
+    </div>
+  </div>
+  <ul
+    className="undo-list-content"
+  />
+</div>
+`;
