@@ -6,6 +6,7 @@ describe('TodoList 组件', ()=>{
     it('组件初始化列表为空', () => {
         const wrapper = shallow( <TodoList /> )
         expect(wrapper.state('undoList')).toEqual([])
+        expect(wrapper.state('doneList')).toEqual([])
     })
     
     it('组件应该给 Header 传递一个增加undoList内容的方法', () => {
@@ -46,8 +47,18 @@ describe('TodoList 组件', ()=>{
         expect(UndoList.prop('handleBlur')).toBeTruthy()
         expect(UndoList.prop('valueChange')).toBeTruthy()
     })
+
+    it('DoneList 组件应该接受 list, deleteItem, changeStatus, handleBlur, valueChange参数', () => {
+        const wrapper = shallow( <TodoList /> )
+        const DoneList = wrapper.find('DoneList')
+        expect(DoneList.prop('list')).toBeTruthy()
+        expect(DoneList.prop('deleteItem')).toBeTruthy()
+        expect(DoneList.prop('changeStatus')).toBeTruthy()
+        expect(DoneList.prop('handleBlur')).toBeTruthy()
+        expect(DoneList.prop('valueChange')).toBeTruthy()
+    })
     
-    it('当delete方法被执行的时候，undoList应该删除内容', () => {
+    it('当deleteItem方法被执行的时候，undoList应该删除内容', () => {
         const wrapper = shallow( <TodoList /> )
         const data = [{
             status: 'div',
@@ -64,6 +75,25 @@ describe('TodoList 组件', ()=>{
         })
         wrapper.instance().deleteItem(1)
         expect(wrapper.state('undoList')).toEqual([data[0], data[2]])
+    })
+
+    it('当deleteDoneItem方法被执行的时候，doneList应该删除内容', () => {
+        const wrapper = shallow( <TodoList /> )
+        const data = [{
+            status: 'div',
+            value: '学习jest'
+        },{
+            status: 'div',
+            value: '学习TDD'
+        },{
+            status: 'div',
+            value: '学习单元测试'
+        }]
+        wrapper.setState({
+            doneList: data
+        })
+        wrapper.instance().deleteDoneItem(1)
+        expect(wrapper.state('doneList')).toEqual([data[0], data[2]])
     })
 
     it('当changeStatus方法被执行的时候，数据项的status应该被修改', () => {
@@ -83,6 +113,28 @@ describe('TodoList 组件', ()=>{
         })
         wrapper.instance().changeStatus(1)
         expect(wrapper.state('undoList')[1]).toEqual({
+            ...data[1],
+            status:'input'
+        })
+    })
+
+    it('当changeDoneStatus方法被执行的时候，数据项的status应该被修改', () => {
+        const wrapper = shallow( <TodoList /> )
+        const data = [{
+            status: 'div',
+            value: '学习jest'
+        },{
+            status: 'div',
+            value: '学习TDD'
+        },{
+            status: 'div',
+            value: '学习单元测试'
+        }]
+        wrapper.setState({
+            doneList: data
+        })
+        wrapper.instance().changeDoneStatus(1)
+        expect(wrapper.state('doneList')[1]).toEqual({
             ...data[1],
             status:'input'
         })
@@ -110,6 +162,28 @@ describe('TodoList 组件', ()=>{
         })
     })    
 
+    it('当handleDoneBlur方法被执行的时候，数据项的status应该被修改', () => {
+        const wrapper = shallow( <TodoList /> )
+        const data = [{
+            status: 'input',
+            value: '学习jest'
+        },{
+            status: 'div',
+            value: '学习TDD'
+        },{
+            status: 'div',
+            value: '学习单元测试'
+        }]
+        wrapper.setState({
+            doneList: data
+        })
+        wrapper.instance().handleDoneBlur(0)
+        expect(wrapper.state('doneList')[0]).toEqual({
+            ...data[0],
+            status:'div'
+        })
+    })    
+
     it('当 valueChange 方法被执行的时候，数据项的value应该被修改', () => {
         const wrapper = shallow( <TodoList /> )
         const data = [{
@@ -129,8 +203,65 @@ describe('TodoList 组件', ()=>{
             value
         })
     })    
-    /**
-     * 14min后面的refactor没加
-     */
+
+    it('当 valueDoneChange 方法被执行的时候，数据项的value应该被修改', () => {
+        const wrapper = shallow( <TodoList /> )
+        const data = [{
+            status: 'input',
+            value: '学习jest'
+        },{
+            status: 'div',
+            value: '学习 TDD'
+        }]
+        const value = 'da huo'
+        wrapper.setState({
+            doneList: data
+        })
+        wrapper.instance().valueDoneChange(0, value)
+        expect(wrapper.state('doneList')[0]).toEqual({
+            ...data[0],
+            value
+        })
+    })    
+
+    it('当 checkUndoItem 方法被执行的时候，数据项的value应该被修改', () => {
+        const wrapper = shallow( <TodoList /> )
+        const data = [{
+            status: 'div',
+            value: '学习jest'
+        },{
+            status: 'div',
+            value: '学习 TDD'
+        }]
+        wrapper.setState({
+            undoList: data
+        })
+        wrapper.instance().checkUndoItem(1,'true')
+        expect(wrapper.state('doneList')[0]).toEqual({
+            status: 'div',
+            value: '学习 TDD'
+        })
+        expect(wrapper.state('undoList').length).toEqual(1)
+    }) 
+
+    it('当 checkDoneItem 方法被执行的时候，数据项的value应该被修改', () => {
+        const wrapper = shallow( <TodoList /> )
+        const data = [{
+            status: 'div',
+            value: '学习jest'
+        },{
+            status: 'div',
+            value: '学习 TDD'
+        }]
+        wrapper.setState({
+            doneList: data
+        })
+        wrapper.instance().checkDoneItem(1)
+        expect(wrapper.state('undoList')[0]).toEqual({
+            status: 'div',
+            value: '学习 TDD'
+        })
+        expect(wrapper.state('doneList').length).toEqual(1)
+    }) 
 })
 

@@ -145,7 +145,6 @@ class TodoList extends Component {
             }
             return newList
         })
-        console.log(newList)
         this.setState({undoList: newList})
         const newUndoList = [...this.state.doneList]
         newUndoList.splice(index,1)

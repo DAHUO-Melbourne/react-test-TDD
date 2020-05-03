@@ -72,6 +72,30 @@ describe('DoneList 组件', ()=>{
         expect(fn).toHaveBeenCalledWith(index)
     })
 
+    it('当点击某一项前面的checkbox时, 会调用标记函数', ()=>{
+        const listData = [{
+            status: 'div',
+            value: '学习jest'
+        },{
+            status: 'div',
+            value: '学习TDD'
+        },{
+            status: 'div',
+            value: '学习单元测试'
+        }]
+        const fn = jest.fn()
+        const index = 1
+        const wrapper = shallow(<DoneList checkItem={fn} list={listData}/>);
+        const deleteItems = findTestWrapper(wrapper, "done-checkbox")
+        deleteItems.at(index).simulate('click', {
+            stopPropagation: ()=>{},
+            target: {
+                checked: 'true'
+            }
+        })
+        expect(fn).toHaveBeenCalledWith(index, "true")
+    })
+
     it('当某一项被点击时，触发 changeStatus 函数', ()=>{
         const listData = [{
             status: 'div',
